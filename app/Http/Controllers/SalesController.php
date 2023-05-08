@@ -36,14 +36,23 @@ class SalesController extends Controller
         
     }
 
-    public function edit()
+    public function edit($id)
     {
-        
+
     }
 
-    public function update()
+    public function update(Request $request,  $id)
     {
-
+        $sale = Sale::findOrFail($id);
+    
+        $sale->nombre_empleado = $request->nombre_empleado;
+        $sale->nombre_cliente = $request->nombre_cliente;
+        $sale->precio = $request->precio;
+        $sale->fecha_compra = $request->fecha_compra;
+    
+        $sale->save();
+        
+        return redirect('sales'); 
     }
 
     public function destroy($id)
